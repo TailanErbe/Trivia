@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Páginas de texto (Política de Privacidade e páginas internas parecidas)
+   .documento-topo   trilha, título e data
+   .prosa            texto corrido: títulos, parágrafos, listas e links
+   ========================================================================== */
+.documento-topo {
+  padding-block: clamp(48px, 6vw, 96px) clamp(32px, 4vw, 56px);
+  border-bottom: 1px solid var(--cor-linha);
+}
+
+/* Texto alinhado à esquerda, como o resto do site, com linhas de leitura confortável */
+.documento-topo__inner > * {
+  max-width: 46rem;
+}
+
+.documento-topo .titulo-hero {
+  margin-bottom: 20px;
+}
+
+.documento-data {
+  margin-top: 24px;
+  color: var(--cor-texto-suave);
+  font-size: var(--fs-pequeno);
+}
+
+.documento-aviso {
+  margin-top: 12px;
+}
+
+.documento {
+  padding-top: clamp(40px, 5vw, 72px);
+}
+
+/* ---------- Texto à esquerda e lateral fixa à direita ---------- */
+.documento-grade {
+  display: grid;
+  grid-template-columns: minmax(0, 46rem) minmax(240px, 320px);
+  justify-content: space-between;
+  gap: clamp(40px, 6vw, 120px);
+  align-items: start;
+}
+
+.documento-grade > .prosa {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.documento-lateral {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: calc(var(--header-altura) + 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 26px;
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio-lg);
+  background-color: var(--cor-superficie);
+}
+
+.documento-lateral__titulo {
+  color: var(--cor-destaque-texto);
+  font-size: var(--fs-rotulo);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.documento-indice {
+  display: grid;
+  gap: 2px;
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--cor-linha);
+  counter-reset: indice;
+}
+
+.documento-indice a {
+  display: block;
+  padding: 6px 0;
+  color: var(--cor-texto-suave);
+  font-size: var(--fs-pequeno);
+  line-height: 1.4;
+  transition: color var(--transicao);
+}
+
+.documento-indice a:hover {
+  color: var(--cor-titulo);
+}
+
+/* ---------- Texto corrido ---------- */
+.prosa {
+  color: var(--cor-texto);
+  font-size: var(--fs-texto);
+  line-height: 1.75;
+}
+
+.prosa > * + * {
+  margin-top: 1em;
+}
+
+.prosa h2 {
+  margin-top: clamp(40px, 4vw, 56px);
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-subtitulo);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.prosa h2:first-child {
+  margin-top: 0;
+}
+
+.prosa h2 + * {
+  margin-top: 14px;
+}
+
+.prosa ul {
+  display: grid;
+  gap: 8px;
+}
+
+/* Marcador: a estrela de quatro pontas do logo */
+.prosa li {
+  position: relative;
+  padding-left: 26px;
+}
+
+.prosa li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 2px;
+  width: 11px;
+  height: 11px;
+  background-color: var(--cor-destaque);
+  -webkit-mask: url("../../assets/icons/estrela-marca.svg") center / contain no-repeat;
+  mask: url("../../assets/icons/estrela-marca.svg") center / contain no-repeat;
+}
+
+.prosa a {
+  color: var(--cor-titulo);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--cor-destaque);
+  text-underline-offset: 3px;
+  transition: color var(--transicao);
+}
+
+.prosa a:hover {
+  color: var(--cor-destaque-texto);
+}
+
+.prosa strong {
+  color: var(--cor-titulo);
+  font-weight: 600;
+}
+
+/* ---------- Responsivo: uma coluna; o índice sai (o progresso fica em cima) ---------- */
+@media (max-width: 1024px) {
+  .documento-grade {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 46rem;
+  }
+
+  .documento-lateral {
+    grid-column: 1;
+    position: static;
+  }
+
+  .documento-grade > .prosa {
+    grid-row: 2;
+  }
+
+  .documento-indice,
+  .documento-lateral--so-indice {
+    display: none;
+  }
+}
+
+@media (min-width: 2200px) {
+  .documento-topo__inner > * {
+    max-width: 52rem;
+  }
+
+  .documento-grade {
+    grid-template-columns: minmax(0, 52rem) minmax(280px, 380px);
+  }
+}
+
+/* ---------- Impressão: só o texto, sem cabeçalho, rodapé e botão fixo ---------- */
+@media print {
+  .header,
+  .footer,
+  .whatsapp-fixo,
+  .pular-conteudo,
+  .trilha,
+  .documento-lateral--so-indice,
+  .documento-indice {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0;
+  }
+
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+
+  .documento-topo {
+    padding-block: 0 16px;
+  }
+
+  .titulo-hero {
+    font-size: 26pt;
+  }
+
+  .prosa h2 {
+    break-after: avoid;
+  }
+
+  .js .reveal,
+  .js .reveal-group > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

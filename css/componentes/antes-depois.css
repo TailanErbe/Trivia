@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Comparador antes e depois (js/componentes/antes-depois.js)
+   Arrastar a alça (mouse ou dedo) ou usar as setas do teclado.
+   --pos   posição da divisória, de 0% a 100%
+   ========================================================================== */
+.antes-depois {
+  --pos: 50%;
+
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--raio-lg);
+  overflow: hidden;
+  background-color: var(--azul-900);
+  cursor: ew-resize;
+  /* O gesto vertical continua rolando a página; o horizontal move a divisória */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.antes-depois img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* A foto do "antes" fica por cima, cortada até a divisória */
+.antes-depois__antes {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+/* Controle do teclado e leitores de tela: invisível, por cima de tudo */
+.antes-depois__controle {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  pointer-events: none;
+}
+
+.antes-depois__alca {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  z-index: 2;
+  width: 2px;
+  margin-left: -1px;
+  background-color: var(--branco);
+  box-shadow: 0 0 12px rgba(8, 29, 46, 0.35);
+  pointer-events: none;
+}
+
+.antes-depois__botao {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--branco);
+  border-radius: 50%;
+  background-color: rgba(15, 44, 68, 0.72);
+  color: var(--branco);
+  box-shadow: 0 8px 24px rgba(8, 29, 46, 0.35);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transform: translate(-50%, -50%);
+  transition: transform var(--transicao), background-color var(--transicao);
+}
+
+.antes-depois__botao .icone {
+  width: 26px;
+  height: 26px;
+}
+
+.antes-depois.is-arrastando .antes-depois__botao {
+  background-color: var(--azul-700);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.antes-depois__controle:focus-visible ~ .antes-depois__alca .antes-depois__botao {
+  outline: 3px solid var(--dourado-300);
+  outline-offset: 3px;
+}
+
+.antes-depois__etiqueta {
+  position: absolute;
+  top: 16px;
+  z-index: 1;
+  padding: 6px 14px;
+  border-radius: var(--raio-pilula);
+  background-color: rgba(8, 29, 46, 0.72);
+  color: var(--branco);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.antes-depois__etiqueta--antes {
+  left: 16px;
+}
+
+.antes-depois__etiqueta--depois {
+  right: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--azul-700);
+}
+
+@media (max-width: 560px) {
+  .antes-depois {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--raio);
+  }
+
+  .antes-depois__botao {
+    width: 48px;
+    height: 48px;
+  }
+}

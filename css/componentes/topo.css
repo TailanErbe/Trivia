@@ -1,0 +1,186 @@
+/* ==========================================================================
+   Topo de tela cheia (Home e páginas de serviço)
+   O texto fica na metade esquerda do container e a foto
+   ocupa a metade direita da tela, da borda do cabeçalho até a seção seguinte.
+   No celular: texto em cima e a foto de borda a borda embaixo.
+   .hero__destaque   cartão sobre a borda esquerda da foto
+   .hero__selo       selo da nota no Google abaixo dos botões
+   ========================================================================== */
+.hero {
+  position: relative;
+  z-index: 1; /* o cartão do topo passa por cima da faixa azul no celular */
+  display: flex;
+  align-items: center;
+  min-height: clamp(600px, calc(100svh - var(--header-altura)), 960px);
+  padding-block: clamp(48px, 6vw, 112px);
+}
+
+.hero__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+}
+
+.hero__texto {
+  padding-right: clamp(32px, 5vw, 112px);
+}
+
+.hero__texto .titulo-hero {
+  max-width: 11.5em;
+}
+
+.hero__texto .texto-destaque {
+  max-width: 34em;
+}
+
+.hero__texto .botoes {
+  margin-top: clamp(28px, 3vw, 40px);
+}
+
+.hero__selo {
+  margin-top: clamp(32px, 3.4vw, 48px);
+}
+
+.hero__midia {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+}
+
+.hero__foto {
+  position: absolute;
+  inset: 0;
+  border-bottom-left-radius: clamp(24px, 3vw, 48px);
+  overflow: hidden;
+}
+
+/* --foco: o ponto da foto que nunca sai do quadro (ex.: style="--foco: 30% 50%" na figure) */
+.hero__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--foco, 42% 50%);
+}
+
+/* Entrada: a foto do topo acende devagar */
+.js .hero__foto img {
+  animation: hero-foto 1.6s var(--ease-out) both;
+}
+
+@keyframes hero-foto {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+}
+
+/* Cartão sobre a borda esquerda da foto (ex.: "Especialista em pós-obra") */
+.hero__destaque {
+  position: absolute;
+  left: clamp(-56px, -3.4vw, -24px);
+  bottom: clamp(40px, 5vw, 96px);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 360px;
+  padding: 18px 24px 18px 18px;
+  border-radius: var(--raio);
+  background-color: var(--branco);
+  box-shadow: var(--sombra);
+  color: var(--cor-texto-suave);
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+.hero__destaque .icone-circulo {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+}
+
+.hero__destaque .icone-circulo .icone {
+  width: 24px;
+  height: 24px;
+}
+
+.hero__destaque strong {
+  display: block;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: 19px;
+  font-weight: 400;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+  .hero {
+    display: block;
+    min-height: 0;
+    padding-bottom: 0;
+  }
+
+  .hero__grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__texto {
+    padding-right: 0;
+  }
+
+  .hero__midia {
+    position: relative;
+    width: auto;
+    margin: clamp(40px, 7vw, 56px) calc(var(--gutter) * -1) 0;
+    aspect-ratio: 4 / 3.2;
+  }
+
+  .hero__foto {
+    border-radius: 0;
+  }
+
+  .hero__destaque {
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: -36px;
+    max-width: none;
+  }
+
+  /* Espaço para o cartão que passa da foto */
+  .hero + .faixa {
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__destaque {
+    padding: 14px 16px;
+  }
+
+  .hero__destaque strong {
+    font-size: 17px;
+    white-space: normal;
+  }
+}
+
+/* ---------- Telas muito largas (acima de 1920 px): tudo cresce junto com a tela ---------- */
+@media (min-width: 2200px) {
+  .hero__destaque {
+    max-width: 460px;
+    padding: 22px 30px 22px 22px;
+    font-size: clamp(14.5px, 0.66vw, 18px);
+  }
+
+  .hero__destaque strong {
+    font-size: clamp(19px, 0.88vw, 25px);
+  }
+
+  .hero__destaque .icone-circulo {
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Ícones do sprite assets/icons/icones.svg
+   <svg class="icone" aria-hidden="true"><use href="assets/icons/icones.svg#casa"></use></svg>
+   Traço fino e cor do texto (currentColor); os de marca (WhatsApp, Google) são cheios.
+   ========================================================================== */
+.icone {
+  flex-shrink: 0;
+  width: 1.25em;
+  height: 1.25em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Ícone grande dos serviços e diferenciais: traço mais fino */
+.icone--grande {
+  width: 40px;
+  height: 40px;
+  stroke-width: 1.15;
+  color: var(--cor-icone);
+}
+
+/* Ícone dentro de um círculo de linha fina */
+.icone-circulo {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--cor-linha-forte);
+  border-radius: 50%;
+  color: var(--cor-icone);
+}
+
+.icone-circulo .icone {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.25;
+}

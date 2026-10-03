@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Animações de entrada (ativadas por js/componentes/animacoes.js)
+   .reveal         elemento sobe e aparece ao entrar na tela
+   .reveal--mask   imagem revelada de baixo para cima, com leve zoom de saída
+   .reveal-group   os filhos diretos aparecem em sequência (rótulo, título, texto...)
+   .reveal-stagger lista cujos itens .reveal entram um depois do outro
+   .reveal--fade   só aparece, sem se mover
+   --i             posição na sequência; cada passo atrasa a entrada
+   ========================================================================== */
+
+/* Entrada de todas as páginas: o cabeçalho desce suavemente */
+.js .header__inner {
+  animation: fade-down 1s var(--ease-out) 0.1s backwards;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal--fade {
+  transform: none;
+  transition-duration: 1.3s;
+}
+
+/* Cortina: o quadro abre de baixo para cima enquanto a imagem "assenta".
+   Usa mask e não clip-path: com clip-path o elemento escondido nunca conta como "na tela" */
+.js .reveal--mask {
+  opacity: 1;
+  transform: none;
+  -webkit-mask: linear-gradient(#000, #000) bottom / 100% 0% no-repeat;
+  mask: linear-gradient(#000, #000) bottom / 100% 0% no-repeat;
+  transition: -webkit-mask-size 1.3s var(--ease-out), mask-size 1.3s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.js .reveal--mask.is-visible {
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* :where() zera a especificidade, para não atrapalhar o zoom de hover das imagens */
+:where(.js .reveal--mask) img {
+  transition: transform 1.5s var(--ease-out);
+}
+
+:where(.js .reveal--mask:not(.is-visible)) img {
+  transform: scale(1.1);
+}
+
+/* Sequência: usa animation (e não transition) para não sobrescrever o hover dos botões */
+.js .reveal-group > * {
+  opacity: 0;
+}
+
+.js .reveal-group.is-visible > * {
+  opacity: 1;
+  animation: fade-up 0.9s var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.js .reveal-group.is-visible > .divisor {
+  animation-name: grow-x;
+}
+
+/* --------------------------------------------------------------------------
+   Rolando para cima: o elemento que saiu por cima (.reveal--from-top) volta
+   descendo, como o espelho da entrada normal
+   -------------------------------------------------------------------------- */
+.js .reveal.reveal--from-top:not(.is-visible):not(.reveal--fade):not(.reveal--mask) {
+  transform: translateY(-32px);
+}
+
+.js .reveal.reveal--from-top {
+  transition-delay: calc((var(--n, 1) - 1 - var(--i, 0)) * 0.1s);
+}
+
+/* Usada pelo JS para trocar o lado de entrada sem animar a troca */
+.js .reveal--instant {
+  transition: none !important;
+}
+
+.js .reveal--mask.reveal--from-top {
+  -webkit-mask-position: top;
+  mask-position: top;
+}
+
+.js .reveal-group.reveal--from-top.is-visible > * {
+  animation-name: fade-down;
+  animation-delay: calc((var(--n, 1) - 1 - var(--i, 0)) * 0.1s);
+}
+
+.js .reveal-group.reveal--from-top.is-visible > .divisor {
+  animation-name: grow-x;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}

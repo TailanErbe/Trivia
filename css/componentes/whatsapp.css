@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Botão fixo do WhatsApp (canto inferior direito, em todas as páginas)
+   ========================================================================== */
+.whatsapp-fixo {
+  position: fixed;
+  right: clamp(16px, 2vw, 32px);
+  bottom: calc(clamp(16px, 2vw, 32px) + env(safe-area-inset-bottom));
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.whatsapp-fixo__botao {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background-color: var(--verde-whatsapp);
+  color: var(--branco);
+  box-shadow: 0 12px 28px -10px rgba(8, 29, 46, 0.45), 0 0 0 0 rgba(29, 168, 81, 0.4);
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+
+.whatsapp-fixo__botao .icone {
+  width: 30px;
+  height: 30px;
+}
+
+.whatsapp-fixo__botao:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Etiqueta que aparece ao passar o mouse (no computador). Vem depois do botão no HTML
+   (para o foco do teclado também mostrar) e aparece à esquerda dele */
+.whatsapp-fixo__etiqueta {
+  order: -1;
+  padding: 9px 16px;
+  border-radius: var(--raio-pilula);
+  background-color: var(--azul-700);
+  color: var(--branco);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: var(--sombra-suave);
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: opacity var(--transicao), transform var(--transicao);
+}
+
+.whatsapp-fixo:hover .whatsapp-fixo__etiqueta,
+.whatsapp-fixo__botao:focus-visible + .whatsapp-fixo__etiqueta {
+  opacity: 1;
+  transform: none;
+}
+
+/* Um pulso discreto chama a atenção uma vez, ao abrir a página */
+.js .whatsapp-fixo__botao {
+  animation: whatsapp-pulso 2.4s var(--ease-out) 2.5s 2;
+}
+
+@keyframes whatsapp-pulso {
+  0% {
+    box-shadow: 0 12px 28px -10px rgba(8, 29, 46, 0.45), 0 0 0 0 rgba(29, 168, 81, 0.45);
+  }
+  70% {
+    box-shadow: 0 12px 28px -10px rgba(8, 29, 46, 0.45), 0 0 0 16px rgba(29, 168, 81, 0);
+  }
+  100% {
+    box-shadow: 0 12px 28px -10px rgba(8, 29, 46, 0.45), 0 0 0 0 rgba(29, 168, 81, 0);
+  }
+}
+
+/* No celular não há "passar o mouse": a etiqueta some */
+@media (hover: none) {
+  .whatsapp-fixo__etiqueta {
+    display: none;
+  }
+}

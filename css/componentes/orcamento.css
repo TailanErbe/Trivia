@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Pedido de orçamento (partials/orcamento.html): chamada, canais e formulário
+   ========================================================================== */
+.orcamento__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(40px, 6vw, 112px);
+  align-items: start;
+}
+
+.orcamento__intro {
+  position: sticky;
+  top: calc(var(--header-altura) + 40px);
+}
+
+.orcamento__canais {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px solid var(--cor-linha);
+}
+
+.canal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.canal .icone-circulo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.canal .icone-circulo .icone {
+  width: 22px;
+  height: 22px;
+}
+
+.canal__rotulo {
+  color: var(--cor-texto-suave);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.canal__valor {
+  color: var(--cor-titulo);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+a.canal__valor:hover {
+  color: var(--cor-destaque-texto);
+}
+
+/* ---------- Formulário ---------- */
+.form {
+  padding: clamp(24px, 3.4vw, 48px);
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio-lg);
+  background-color: var(--branco);
+  box-shadow: var(--sombra);
+  color: var(--azul-700);
+}
+
+.form__grupo + .form__grupo,
+.form__grupo + .form__campo {
+  margin-top: 32px;
+}
+
+.form__legenda {
+  display: block;
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid rgba(15, 44, 68, 0.1);
+  color: var(--dourado-700);
+  font-size: var(--fs-rotulo);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.form__grade {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 18px;
+}
+
+.form__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0; /* o campo de seleção não força a largura da coluna no celular */
+}
+
+.form__campo--inteiro {
+  grid-column: 1 / -1;
+}
+
+.form__rotulo {
+  color: var(--azul-700);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.form__opcional {
+  color: #5a6572;
+  font-weight: 400;
+}
+
+.form__input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 1px solid rgba(15, 44, 68, 0.2);
+  border-radius: 12px;
+  background-color: var(--branco-quente);
+  color: var(--azul-700);
+  font-size: 16px; /* 16px evita o zoom automático do iPhone */
+  line-height: 1.4;
+  transition: border-color var(--transicao), box-shadow var(--transicao), background-color var(--transicao);
+}
+
+.form__input::placeholder {
+  color: #7d8792;
+  opacity: 1;
+}
+
+.form__input:hover {
+  border-color: rgba(15, 44, 68, 0.36);
+}
+
+.form__input:focus {
+  outline: none;
+  border-color: var(--dourado-600);
+  background-color: var(--branco);
+  box-shadow: 0 0 0 4px rgba(196, 154, 87, 0.22);
+}
+
+select.form__input {
+  padding-right: 44px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f2c44' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-position: right 16px center;
+  background-repeat: no-repeat;
+  background-size: 18px;
+  cursor: pointer;
+}
+
+select.form__input:invalid {
+  color: #7d8792;
+}
+
+textarea.form__input {
+  min-height: 112px;
+  resize: vertical;
+}
+
+/* Campo preenchido por um botão ("Pedir orçamento de pós-obra"): brilha por um instante */
+.form__input.is-preenchido {
+  animation: campo-preenchido 1.8s ease;
+}
+
+@keyframes campo-preenchido {
+  0%,
+  40% {
+    border-color: var(--dourado-500);
+    box-shadow: 0 0 0 4px rgba(196, 154, 87, 0.32);
+  }
+}
+
+.form__campo.has-error .form__input {
+  border-color: var(--vermelho-erro);
+}
+
+.form__erro {
+  min-height: 0;
+  color: var(--vermelho-erro);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.form__erro:empty {
+  display: none;
+}
+
+/* ---------- Aceite (LGPD) ---------- */
+.form__aceite {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.form__aceite input {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  accent-color: var(--azul-700);
+  cursor: pointer;
+}
+
+.form__aceite a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.form__envio {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.form__nota {
+  color: #5a6572;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.form__status {
+  font-size: 14px;
+  text-align: center;
+}
+
+.form__status.is-success {
+  color: #1d7a45;
+}
+
+.form__status.is-error {
+  color: var(--vermelho-erro);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1024px) {
+  .orcamento__grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .orcamento__intro {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .form__grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form {
+    border-radius: var(--raio);
+  }
+}

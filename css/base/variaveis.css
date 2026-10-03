@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Variáveis globais: cores, fontes, espaçamentos e tamanhos de texto
+
+   Paleta tirada das artes da Trívia Clean (azul-petróleo, dourado, cinza e creme)
+   e conferida no contraste (WCAG AA):
+   - dourado-500 é a cor da marca: só em detalhes sobre fundo claro (linhas, estrela, ícones grandes).
+     Como texto, só sobre azul.
+   - dourado-700 é o dourado para texto sobre fundo claro (contraste 5:1).
+   ========================================================================== */
+:root {
+  /* ---------- Paleta ---------- */
+  --azul-900: #081d2e;
+  --azul-800: #0c2538;
+  --azul-700: #0f2c44; /* azul da marca (logo) */
+  --azul-600: #1a3d5c;
+  --azul-100: #e6ebf0;
+
+  --dourado-300: #dcbe8a;
+  --dourado-500: #c49a57; /* dourado da marca */
+  --dourado-600: #a07a3c;
+  --dourado-700: #8a6630;
+
+  --cinza-300: #a9adb3;
+  --cinza-500: #6b7380; /* cinza do logo */
+
+  --creme: #f4eee5;
+  --branco-quente: #fbf9f6;
+  --branco: #ffffff;
+
+  --verde-whatsapp: #1da851;
+  --vermelho-erro: #b3412e;
+
+  /* ---------- Cores por função (tema claro, padrão) ---------- */
+  --cor-fundo: var(--branco-quente);
+  --cor-fundo-alt: var(--creme);
+  --cor-superficie: var(--branco);
+  --cor-titulo: var(--azul-700);
+  --cor-texto: #2a3947;
+  --cor-texto-suave: #5a6572;
+  --cor-destaque: var(--dourado-500);       /* linhas, estrela, detalhes */
+  --cor-destaque-texto: var(--dourado-700); /* rótulos e textos dourados */
+  --cor-icone: var(--dourado-600);
+  --cor-linha: rgba(15, 44, 68, 0.12);
+  --cor-linha-forte: rgba(15, 44, 68, 0.28);
+  --cor-foco: var(--dourado-600);
+  --cor-erro: var(--vermelho-erro);
+
+  /* ---------- Fontes ---------- */
+  --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;
+  --fonte-texto: "Jost", "Helvetica Neue", Arial, sans-serif;
+
+  /* ---------- Tamanhos de texto ---------- */
+  --fs-hero: clamp(40px, 5.4vw, 84px);
+  --fs-titulo: clamp(32px, 3.4vw, 54px);
+  --fs-subtitulo: clamp(21px, 1.6vw, 26px);
+  --fs-destaque: clamp(18px, 1.3vw, 21px);
+  --fs-texto: 17px;
+  --fs-pequeno: 14.5px;
+  --fs-rotulo: 13px;
+
+  /* ---------- Espaços e medidas ---------- */
+  /* O conteúdo ocupa toda a largura da tela, só com as margens laterais (proporcionais).
+     Acima de 1920 px a página acompanha a tela, sem limite */
+  --gutter: clamp(20px, 6.8vw, 240px);
+  --secao-espaco: clamp(72px, 8.5vw, 144px);
+  --header-altura: 84px;
+
+  --raio-sm: 8px;
+  --raio: 14px;
+  --raio-lg: 24px;
+  --raio-pilula: 999px;
+
+  --sombra-suave: 0 1px 2px rgba(8, 29, 46, 0.05), 0 8px 24px -12px rgba(8, 29, 46, 0.14);
+  --sombra: 0 2px 4px rgba(8, 29, 46, 0.04), 0 24px 48px -20px rgba(8, 29, 46, 0.24);
+
+  --transicao: 0.35s ease;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Faixas em azul: a seção (ou bloco) inteira troca as cores por função */
+.tema-escuro {
+  --cor-fundo: var(--azul-800);
+  --cor-fundo-alt: var(--azul-900);
+  --cor-superficie: rgba(255, 255, 255, 0.04);
+  --cor-titulo: var(--branco);
+  --cor-texto: rgba(255, 255, 255, 0.86);
+  --cor-texto-suave: #b4bec8;
+  --cor-destaque: var(--dourado-500);
+  --cor-destaque-texto: var(--dourado-300);
+  --cor-icone: var(--dourado-300);
+  --cor-linha: rgba(255, 255, 255, 0.14);
+  --cor-linha-forte: rgba(255, 255, 255, 0.32);
+  --cor-foco: var(--dourado-300);
+  --cor-erro: #f0a08f;
+
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+/* Telas muito largas (monitor grande ou zoom do navegador abaixo de 100%):
+   os textos crescem junto, para a página não ficar com letras pequenas e espaço sobrando */
+@media (min-width: 2200px) {
+  :root {
+    --fs-hero: clamp(84px, 3.9vw, 132px);
+    --fs-titulo: clamp(54px, 2.45vw, 84px);
+    --fs-subtitulo: clamp(26px, 1.15vw, 36px);
+    --fs-destaque: clamp(21px, 0.95vw, 28px);
+    --fs-texto: clamp(17px, 0.78vw, 22px);
+    --fs-pequeno: clamp(14.5px, 0.66vw, 18px);
+    --header-altura: 96px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --header-altura: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --fs-texto: 16px;
+  }
+}

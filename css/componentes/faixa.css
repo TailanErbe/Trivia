@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Faixa de diferenciais (azul, logo abaixo do topo)
+   <section class="faixa tema-escuro"><ul class="container faixa__lista">...
+   ========================================================================== */
+.faixa {
+  padding-block: 28px;
+}
+
+.faixa__lista {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px 32px;
+}
+
+.faixa__lista li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--cor-titulo);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.faixa__lista .icone {
+  width: 30px;
+  height: 30px;
+  stroke-width: 1.25;
+  color: var(--cor-icone);
+}
+
+@media (max-width: 1100px) {
+  .faixa__lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .faixa__lista {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 2200px) {
+  .faixa {
+    padding-block: 36px;
+  }
+
+  .faixa__lista li {
+    font-size: clamp(15px, 0.68vw, 19px);
+  }
+
+  .faixa__lista .icone {
+    width: 36px;
+    height: 36px;
+  }
+}

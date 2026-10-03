@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Trívia Clean - Limpeza Especializada
+   Estilos compartilhados por TODAS as páginas.
+
+   Cada página carrega este arquivo + o CSS dela em css/paginas/:
+     <link rel="stylesheet" href="css/global.css">
+     <link rel="stylesheet" href="css/paginas/home.css">
+
+   Para um novo componente usado em várias páginas, crie o arquivo em
+   css/componentes/ e importe aqui.
+   ========================================================================== */
+
+/* Base */
+@import url("base/fontes.css");
+@import url("base/variaveis.css");
+@import url("base/reset.css");
+@import url("base/layout.css");
+@import url("base/tipografia.css");
+
+/* Componentes */
+@import url("componentes/icones.css");
+@import url("componentes/botoes.css");
+@import url("componentes/animacoes.css");
+@import url("componentes/cabecalho.css");
+@import url("componentes/trilha.css");
+@import url("componentes/topo.css");
+@import url("componentes/faixa.css");
+@import url("componentes/cartoes.css");
+@import url("componentes/destaque.css");
+@import url("componentes/resultados.css");
+@import url("componentes/antes-depois.css");
+@import url("componentes/carrossel.css");
+@import url("componentes/perguntas.css");
+@import url("componentes/orcamento.css");
+@import url("componentes/rodape.css");
+@import url("componentes/whatsapp.css");

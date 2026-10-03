@@ -1,0 +1,3 @@
+# GitHub Pages (publicado da branch main): o que fica fora do site
+exclude:
+  - ferramentas/

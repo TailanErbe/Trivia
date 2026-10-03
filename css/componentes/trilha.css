@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Trilha de navegação (Início / Serviços / Limpeza pós-obra)
+   <nav class="trilha" aria-label="Você está em"><ol><li><a>...</a></li>...</ol></nav>
+   ========================================================================== */
+.trilha {
+  margin-bottom: clamp(20px, 2.4vw, 32px);
+}
+
+.trilha ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0;
+  color: var(--cor-texto-suave);
+  font-size: var(--fs-pequeno);
+  line-height: 1.4;
+}
+
+.trilha li + li::before {
+  content: "/";
+  margin-inline: 10px;
+  color: var(--cor-linha-forte);
+}
+
+.trilha a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: color var(--transicao), text-decoration-color var(--transicao);
+}
+
+.trilha a:hover {
+  color: var(--cor-titulo);
+  text-decoration-color: var(--cor-destaque);
+}
+
+.trilha [aria-current="page"] {
+  color: var(--cor-titulo);
+  font-weight: 500;
+}

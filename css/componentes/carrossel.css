@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Carrossel (js/componentes/carrossel.js), usado nas avaliações
+   Trilho com rolagem lateral e encaixe em cada card; quantos cards aparecem
+   depende da largura da tela (--por-vez). No celular, o próximo card aparece
+   pela metade, mostrando que dá para arrastar.
+   ========================================================================== */
+.carrossel {
+  --por-vez: 3;
+  --espaco: 24px;
+}
+
+/* O trilho corre até as bordas da tela (a margem vira recuo interno): os cards começam
+   alinhados ao texto, e o próximo aparece na margem, mostrando que tem mais */
+.carrossel__trilho {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--espaco) * (var(--por-vez) - 1)) / var(--por-vez));
+  gap: var(--espaco);
+  margin-inline: calc(var(--gutter) * -1);
+  padding: 0 var(--gutter) 4px; /* 4px: a sombra do foco não é cortada */
+  scroll-padding-inline: var(--gutter);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.carrossel__trilho::-webkit-scrollbar {
+  display: none;
+}
+
+/* Durante o arraste com o mouse o encaixe sai, para o movimento acompanhar a mão */
+.carrossel__trilho.is-arrastando {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.carrossel__trilho:focus-visible {
+  outline-offset: 6px;
+  border-radius: var(--raio-lg);
+}
+
+.carrossel__item {
+  scroll-snap-align: start;
+}
+
+/* ---------- Controles: progresso, pausa e setas ---------- */
+.carrossel__controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.carrossel__progresso {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  margin-right: 14px;
+  border-radius: 2px;
+  background-color: var(--cor-linha);
+  overflow: hidden;
+}
+
+.carrossel__barra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--inicio, 0%);
+  width: var(--tamanho, 33%);
+  border-radius: 2px;
+  background-color: var(--cor-destaque);
+  transition: left 0.5s var(--ease-out), width 0.5s var(--ease-out);
+}
+
+.carrossel__botao {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--cor-linha-forte);
+  border-radius: 50%;
+  color: var(--cor-titulo);
+  transition: border-color var(--transicao), background-color var(--transicao), color var(--transicao);
+}
+
+.carrossel__botao:hover {
+  border-color: var(--cor-titulo);
+  background-color: var(--cor-titulo);
+  color: var(--cor-fundo);
+}
+
+.carrossel__botao .icone {
+  width: 20px;
+  height: 20px;
+}
+
+.carrossel__botao--pausa .icone {
+  width: 16px;
+  height: 16px;
+}
+
+.carrossel__botao--pausa .icone--continuar,
+.carrossel.is-pausado .carrossel__botao--pausa .icone--pausar {
+  display: none;
+}
+
+.carrossel.is-pausado .carrossel__botao--pausa .icone--continuar {
+  display: block;
+}
+
+/* Sem troca automática (quem pede menos movimento), o botão de pausa não aparece */
+.carrossel.sem-autoplay .carrossel__botao--pausa {
+  display: none;
+}
+
+/* ---------- Quantos cards por vez ---------- */
+@media (max-width: 1100px) {
+  .carrossel {
+    --por-vez: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .carrossel {
+    --espaco: 14px;
+  }
+
+  /* Um card e o começo do próximo */
+  .carrossel__trilho {
+    grid-auto-columns: 86%;
+  }
+
+  .carrossel__progresso {
+    margin-right: 6px;
+  }
+
+  .carrossel__botao {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (min-width: 2200px) {
+  .carrossel {
+    --por-vez: 4;
+    --espaco: 32px;
+  }
+
+  .carrossel__botao {
+    width: 58px;
+    height: 58px;
+  }
+}

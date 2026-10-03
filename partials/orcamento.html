@@ -1,0 +1,145 @@
+<!-- Bloco compartilhado por todas as páginas. Inserido via data-include (js/componentes/partials.js). -->
+<!-- ============ PEDIDO DE ORÇAMENTO ============ -->
+<section class="orcamento secao secao--alt" id="orcamento" aria-labelledby="orcamento-titulo">
+  <div class="container orcamento__grade">
+
+    <div class="orcamento__intro reveal-group">
+      <p class="rotulo">Orçamento</p>
+      <h2 class="titulo" id="orcamento-titulo">Deixe a limpeza com quem <em>entende</em> do assunto.</h2>
+      <p class="texto-destaque">Conte o que você precisa e receba um orçamento sob medida para o seu imóvel.</p>
+
+      <ul class="orcamento__canais">
+        <li class="canal">
+          <span class="icone-circulo"><svg class="icone" aria-hidden="true"><use href="assets/icons/icones.svg#whatsapp"></use></svg></span>
+          <div>
+            <p class="canal__rotulo">WhatsApp</p>
+            <a class="canal__valor" href="https://wa.me/5527997181451" data-whatsapp>(27) 99718-1451</a>
+          </div>
+        </li>
+        <li class="canal">
+          <span class="icone-circulo"><svg class="icone" aria-hidden="true"><use href="assets/icons/icones.svg#instagram"></use></svg></span>
+          <div>
+            <p class="canal__rotulo">Instagram</p>
+            <a class="canal__valor" href="https://www.instagram.com/trivialimpeza/" target="_blank" rel="noopener">@trivialimpeza</a>
+          </div>
+        </li>
+        <li class="canal">
+          <span class="icone-circulo"><svg class="icone" aria-hidden="true"><use href="assets/icons/icones.svg#local"></use></svg></span>
+          <div>
+            <p class="canal__rotulo">Onde atendemos</p>
+            <p class="canal__valor">Serra, Vitória e Vila Velha (ES)</p>
+          </div>
+        </li>
+        <li class="canal">
+          <span class="icone-circulo"><svg class="icone" aria-hidden="true"><use href="assets/icons/icones.svg#relogio"></use></svg></span>
+          <div>
+            <p class="canal__rotulo">Horário de atendimento</p>
+            <p class="canal__valor" data-ficticio>Segunda a sexta, das 8h às 18h<br>Sábado, das 8h às 12h</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <form class="form reveal" id="form-orcamento" action="" method="post" novalidate>
+      <fieldset class="form__grupo">
+        <legend class="form__legenda">O serviço</legend>
+        <div class="form__grade">
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-servico">Tipo de serviço</label>
+            <select class="form__input" id="orcamento-servico" name="servico" required aria-describedby="servico-erro">
+              <option value="" disabled selected>Escolha</option>
+              <option value="pos-obra">Limpeza pós-obra</option>
+              <option value="residencial">Limpeza residencial</option>
+              <option value="empresarial">Limpeza empresarial</option>
+              <option value="condominios">Limpeza de condomínios</option>
+              <option value="vidros">Limpeza de vidros</option>
+              <option value="premium">Limpeza premium e organização</option>
+              <option value="mudanca">Limpeza de mudança</option>
+              <option value="outro">Outro</option>
+            </select>
+            <span class="form__erro" id="servico-erro" aria-live="polite"></span>
+          </div>
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-imovel">Tipo de imóvel <span class="form__opcional">(opcional)</span></label>
+            <select class="form__input" id="orcamento-imovel" name="imovel">
+              <option value="" selected>Escolha</option>
+              <option value="casa">Casa</option>
+              <option value="apartamento">Apartamento</option>
+              <option value="escritorio">Escritório ou sala comercial</option>
+              <option value="loja">Loja</option>
+              <option value="condominio">Áreas comuns de condomínio</option>
+              <option value="imovel-novo">Imóvel novo ou recém-reformado</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-metragem">Metragem aproximada <span class="form__opcional">(m², opcional)</span></label>
+            <input class="form__input" id="orcamento-metragem" name="metragem" type="number" inputmode="numeric" min="1" max="100000" placeholder="Ex.: 120">
+          </div>
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-data">Data desejada <span class="form__opcional">(opcional)</span></label>
+            <input class="form__input" id="orcamento-data" name="data" type="date">
+          </div>
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-cidade">Cidade</label>
+            <select class="form__input" id="orcamento-cidade" name="cidade" required aria-describedby="cidade-erro">
+              <option value="" disabled selected>Escolha</option>
+              <option value="serra">Serra</option>
+              <option value="vitoria">Vitória</option>
+              <option value="vila-velha">Vila Velha</option>
+              <option value="outra">Outra cidade</option>
+            </select>
+            <span class="form__erro" id="cidade-erro" aria-live="polite"></span>
+          </div>
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-bairro">Bairro <span class="form__opcional">(opcional)</span></label>
+            <input class="form__input" id="orcamento-bairro" name="bairro" type="text" maxlength="80" autocomplete="address-level3">
+          </div>
+          <div class="form__campo form__campo--inteiro">
+            <label class="form__rotulo" for="orcamento-mensagem">Mensagem <span class="form__opcional">(opcional)</span></label>
+            <textarea class="form__input" id="orcamento-mensagem" name="mensagem" rows="3" maxlength="2000" placeholder="Conte o que precisa: fase da obra, ambientes, detalhes..."></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form__grupo">
+        <legend class="form__legenda">Seus dados</legend>
+        <div class="form__grade">
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-nome">Nome</label>
+            <input class="form__input" id="orcamento-nome" name="nome" type="text" maxlength="100" autocomplete="name" required aria-describedby="nome-erro">
+            <span class="form__erro" id="nome-erro" aria-live="polite"></span>
+          </div>
+          <div class="form__campo">
+            <label class="form__rotulo" for="orcamento-whatsapp">WhatsApp</label>
+            <input class="form__input" id="orcamento-whatsapp" name="whatsapp" type="tel" maxlength="16" autocomplete="tel-national" inputmode="numeric" placeholder="(27) 99999-9999" required aria-describedby="whatsapp-erro">
+            <span class="form__erro" id="whatsapp-erro" aria-live="polite"></span>
+          </div>
+          <div class="form__campo form__campo--inteiro">
+            <label class="form__rotulo" for="orcamento-email">E-mail <span class="form__opcional">(opcional)</span></label>
+            <input class="form__input" id="orcamento-email" name="email" type="email" maxlength="254" autocomplete="email" aria-describedby="email-erro">
+            <span class="form__erro" id="email-erro" aria-live="polite"></span>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form__campo">
+        <label class="form__aceite">
+          <input type="checkbox" name="aceite" required aria-describedby="aceite-erro">
+          <span>Li e aceito a <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>. Os dados servem só para responder a este pedido.</span>
+        </label>
+        <span class="form__erro" id="aceite-erro" aria-live="polite"></span>
+      </div>
+
+      <div class="form__envio">
+        <button class="btn btn--primario btn--largo" type="submit">
+          <svg class="icone" aria-hidden="true"><use href="assets/icons/icones.svg#whatsapp"></use></svg>
+          Enviar pedido pelo WhatsApp
+        </button>
+        <p class="form__nota">O WhatsApp abre com o seu pedido já escrito. É só enviar.</p>
+        <p class="form__status" role="status"></p>
+      </div>
+    </form>
+
+  </div>
+</section>

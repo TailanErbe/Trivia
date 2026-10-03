@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Bloco de destaque com foto até a borda da tela + lista com check
+   .servico-destaque          a foto ocupa a metade esquerda da tela e o texto
+                              fica na metade direita do container
+   .servico-destaque--direita espelhado: foto na metade direita
+   .lista-check               itens com o check dourado (o que o serviço inclui)
+   ========================================================================== */
+.servico-destaque {
+  position: relative;
+  margin-bottom: clamp(56px, 6vw, 112px);
+}
+
+.servico-destaque__foto {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  border-radius: 0 var(--raio-lg) var(--raio-lg) 0;
+  overflow: hidden;
+}
+
+/* --foco: o ponto da foto que nunca sai do quadro (style="--foco: 50% 30%" no bloco da foto) */
+.servico-destaque__foto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--foco, 50% 50%);
+}
+
+.servico-destaque__foto .card-servico__selo {
+  left: var(--gutter);
+  top: 24px;
+}
+
+.servico-destaque__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.servico-destaque__corpo {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  min-height: clamp(520px, 44vw, 760px);
+  justify-content: center;
+  padding: clamp(40px, 5vw, 96px) 0 clamp(40px, 5vw, 96px) clamp(40px, 5vw, 112px);
+}
+
+/* Linhas de no máximo ~75 caracteres, mesmo em tela ultralarga */
+.servico-destaque__corpo > .texto {
+  max-width: 36em;
+}
+
+.servico-destaque__titulo {
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(28px, 2.6vw, 40px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.servico-destaque .botoes {
+  margin-top: 10px;
+}
+
+/* Espelhado: foto à direita, texto à esquerda */
+.servico-destaque--direita .servico-destaque__foto {
+  right: 0;
+  left: auto;
+  border-radius: var(--raio-lg) 0 0 var(--raio-lg);
+}
+
+.servico-destaque--direita .servico-destaque__foto .card-servico__selo {
+  left: 24px;
+}
+
+.servico-destaque--direita .servico-destaque__corpo {
+  grid-column: 1;
+  padding: clamp(40px, 5vw, 96px) clamp(40px, 5vw, 112px) clamp(40px, 5vw, 96px) 0;
+}
+
+/* ---------- Lista com check ---------- */
+.lista-check {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 28px;
+  width: 100%;
+  padding-block: 22px;
+  border-block: 1px solid var(--cor-linha);
+}
+
+.lista-check li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--cor-titulo);
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+
+.lista-check .icone {
+  width: 20px;
+  height: 20px;
+  margin-top: -1px;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: var(--azul-700);
+  color: var(--dourado-300);
+  stroke-width: 2.4;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1100px) {
+  /* A foto vai de borda a borda, em cima do texto */
+  .servico-destaque__foto,
+  .servico-destaque--direita .servico-destaque__foto {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 0;
+  }
+
+  .servico-destaque__grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .servico-destaque__corpo,
+  .servico-destaque--direita .servico-destaque__corpo {
+    grid-column: 1;
+    min-height: 0;
+    padding: clamp(32px, 5vw, 56px) 0 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .lista-check {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 2200px) {
+  .servico-destaque__titulo {
+    font-size: clamp(40px, 1.8vw, 58px);
+  }
+
+  .lista-check li {
+    font-size: clamp(15.5px, 0.7vw, 20px);
+  }
+
+  .lista-check .icone {
+    width: 24px;
+    height: 24px;
+  }
+}

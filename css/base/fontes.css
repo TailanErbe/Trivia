@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Fontes locais (arquivos em assets/fonts/, licença OFL em assets/fonts/OFL.txt)
+   Títulos: Fraunces (variável: peso e tamanho óptico)
+   Textos: Jost (variável: peso), a versão livre da fonte geométrica do logo
+   Só o subconjunto latin, que já cobre o português (ã, ç, é, ô...).
+   Ficam no próprio site, sem chamar o Google: carrega mais rápido e não envia
+   o IP de quem visita para terceiros (LGPD).
+   ========================================================================== */
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../assets/fonts/fraunces-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../../assets/fonts/fraunces-italic-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("../../assets/fonts/jost-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

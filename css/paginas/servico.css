@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Modelo das páginas de serviço (servico-pos-obra.html e as próximas)
+   O topo, a faixa, o destaque, o antes e depois e as perguntas vêm de
+   css/componentes/. Aqui ficam só as seções próprias deste modelo.
+   ========================================================================== */
+
+/* ---------- Para quem é ---------- */
+.publico {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* Card sem link: não sobe ao passar o mouse */
+.card-servico--estatico:hover {
+  border-color: var(--cor-linha);
+  box-shadow: none;
+  transform: none;
+}
+
+.card-servico--estatico:hover .card-servico__foto img {
+  transform: none;
+}
+
+/* ---------- O que inclui ---------- */
+.inclui .servico-destaque {
+  margin-bottom: 0;
+}
+
+.inclui .rotulo {
+  margin-bottom: 0;
+}
+
+.inclui .servico-destaque__corpo > .pequeno {
+  max-width: 36em;
+}
+
+/* ---------- Detalhes ---------- */
+.detalhes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.detalhe__foto {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--raio-lg);
+  overflow: hidden;
+}
+
+.detalhe__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+}
+
+.detalhe:hover .detalhe__foto img {
+  transform: scale(1.04);
+}
+
+.detalhe figcaption {
+  margin-top: 18px;
+  color: var(--cor-texto-suave);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.detalhe figcaption strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(21px, 1.6vw, 25px);
+  font-weight: 400;
+}
+
+/* ---------- Como funciona ---------- */
+.servico-etapas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(32px, 3vw, 48px);
+}
+
+/* ---------- Perguntas frequentes ---------- */
+.perguntas__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: start;
+}
+
+.perguntas__intro {
+  position: sticky;
+  top: calc(var(--header-altura) + 48px);
+}
+
+.perguntas__intro .btn {
+  margin-top: 28px;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1100px) {
+  .servico-etapas,
+  .detalhes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .publico {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 560px;
+  }
+
+  .perguntas__grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .perguntas__intro {
+    position: static;
+  }
+}
+
+/* No celular, os detalhes viram uma fila que se arrasta para o lado */
+@media (max-width: 760px) {
+  .detalhes {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: 78%;
+    gap: 14px;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .detalhes::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detalhes > li {
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .servico-etapas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Telas muito largas (acima de 1920 px): tudo cresce junto com a tela ---------- */
+@media (min-width: 2200px) {
+  .publico,
+  .detalhes {
+    gap: 32px;
+  }
+
+  .detalhe figcaption {
+    font-size: clamp(15.5px, 0.72vw, 20px);
+  }
+
+  .detalhe figcaption strong {
+    font-size: clamp(25px, 1.15vw, 34px);
+  }
+}

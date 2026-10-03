@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Perguntas frequentes (sanfona com <details>, sem JavaScript)
+   <details class="faq__item" name="grupo">: com o mesmo name, abrir uma fecha a outra
+   ========================================================================== */
+.faq {
+  border-top: 1px solid var(--cor-linha-forte);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--cor-linha);
+}
+
+.faq__pergunta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 24px;
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(19px, 1.5vw, 23px);
+  line-height: 1.3;
+  list-style: none;
+  cursor: pointer;
+  transition: color var(--transicao);
+}
+
+.faq__pergunta::-webkit-details-marker {
+  display: none;
+}
+
+.faq__pergunta:hover {
+  color: var(--cor-destaque-texto);
+}
+
+/* O "+" vira "×" quando a resposta está aberta */
+.faq__pergunta .icone {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid var(--cor-linha-forte);
+  border-radius: 50%;
+  color: var(--cor-titulo);
+  transition: transform var(--transicao), background-color var(--transicao), color var(--transicao);
+}
+
+.faq__item[open] .faq__pergunta .icone {
+  border-color: var(--azul-700);
+  background-color: var(--azul-700);
+  color: var(--branco);
+  transform: rotate(45deg);
+}
+
+.faq__resposta {
+  max-width: 46em;
+  padding-bottom: 28px;
+  color: var(--cor-texto);
+  font-size: var(--fs-texto);
+  line-height: 1.7;
+}
+
+/* A resposta entra suave ao abrir */
+.faq__item[open] .faq__resposta {
+  animation: fade-up 0.5s var(--ease-out);
+}
+
+@media (min-width: 2200px) {
+  .faq__pergunta {
+    font-size: clamp(23px, 1.05vw, 32px);
+  }
+
+  .faq__pergunta .icone {
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+  }
+}

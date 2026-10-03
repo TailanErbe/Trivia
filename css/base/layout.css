@@ -1,0 +1,43 @@
+/* ==========================================================================
+   Estrutura de página: largura do conteúdo e espaçamento das seções
+   ========================================================================== */
+/* O cabeçalho é fixo: o conteúdo começa abaixo dele */
+main {
+  display: block;
+  padding-top: var(--header-altura);
+}
+
+/* Largura total menos as margens laterais: o conteúdo nunca fica preso numa caixa no meio */
+.container {
+  width: calc(100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+/* Texto corrido: linhas com no máximo ~70 caracteres */
+.container--estreito {
+  width: min(820px, 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.secao {
+  padding-block: var(--secao-espaco);
+}
+
+.secao--alt {
+  background-color: var(--cor-fundo-alt);
+}
+
+/* Cabeçalho de seção: rótulo, título e texto de apoio */
+.secao__cabeca {
+  max-width: 46em;
+  margin-bottom: clamp(40px, 4.5vw, 72px);
+}
+
+.secao__cabeca--centro {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.secao__cabeca--centro .rotulo {
+  justify-content: center;
+}

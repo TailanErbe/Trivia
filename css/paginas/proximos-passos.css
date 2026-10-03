@@ -1,0 +1,246 @@
+/* ==========================================================================
+   Próximos passos (proximos-passos.html): página interna para a Trívia
+   Usa css/paginas/documento.css e acrescenta checklist, progresso, dicas
+   e mensagens prontas.
+   ========================================================================== */
+
+/* A página é para a própria Trívia: o botão fixo do WhatsApp (que fala com ela) não aparece */
+.whatsapp-fixo {
+  display: none;
+}
+
+.prosa > section + section {
+  margin-top: clamp(56px, 6vw, 88px);
+}
+
+.prosa .rotulo {
+  margin-bottom: 8px;
+}
+
+.prosa .rotulo + h2 {
+  margin-top: 0;
+}
+
+
+/* ---------- Progresso ---------- */
+.passos-progresso {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.passos-progresso__barra {
+  position: relative;
+  height: 6px;
+  border-radius: var(--raio-pilula);
+  background-color: var(--cor-linha);
+  overflow: hidden;
+}
+
+.passos-progresso__barra span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--progresso, 0%);
+  border-radius: inherit;
+  background-color: var(--dourado-500);
+  transition: width 0.5s var(--ease-out);
+}
+
+.passos-progresso__texto {
+  flex-shrink: 0;
+  color: var(--cor-titulo);
+  font-size: var(--fs-pequeno);
+}
+
+/* ---------- Checklist ---------- */
+.prosa .tarefas {
+  gap: 0;
+  border-top: 1px solid var(--cor-linha);
+}
+
+.prosa .tarefas li {
+  padding-left: 0;
+  border-bottom: 1px solid var(--cor-linha);
+}
+
+.prosa .tarefas li::before {
+  display: none;
+}
+
+.tarefas label {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-block: 18px;
+  cursor: pointer;
+}
+
+.tarefas input {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin: 2px 0 0;
+  accent-color: var(--azul-700);
+  cursor: pointer;
+}
+
+.tarefas strong {
+  display: inline;
+}
+
+/* O exemplo que está no site hoje, para ela conferir */
+.tarefas .exemplo {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 12px;
+  border-left: 2px solid var(--dourado-500);
+  border-radius: 0 var(--raio-sm) var(--raio-sm) 0;
+  background-color: var(--cor-fundo-alt);
+  color: var(--cor-texto-suave);
+  font-size: var(--fs-pequeno);
+  line-height: 1.5;
+}
+
+/* Feito: o texto fica mais leve e riscado no título */
+.tarefas input:checked + span {
+  color: var(--cor-texto-suave);
+}
+
+.tarefas input:checked + span strong {
+  color: var(--cor-texto-suave);
+  text-decoration: line-through;
+  text-decoration-color: var(--dourado-500);
+}
+
+/* ---------- Guia de fotos ---------- */
+.antes-depois-guia {
+  margin-top: 28px;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: var(--raio-lg);
+  background-color: var(--cor-fundo-alt);
+}
+
+.antes-depois-guia h3 {
+  margin-bottom: 16px;
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.passos-numerados {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  counter-reset: passo;
+}
+
+.passos-numerados li {
+  position: relative;
+  padding-left: 44px;
+  counter-increment: passo;
+}
+
+.prosa .passos-numerados li::before {
+  content: counter(passo);
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--azul-700);
+  color: var(--branco);
+  font-family: var(--fonte-titulo);
+  font-size: 16px;
+  line-height: 1;
+  -webkit-mask: none;
+  mask: none;
+}
+
+.prosa .dicas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.prosa .dicas li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.prosa .dicas li::before {
+  display: none;
+}
+
+.dicas .icone {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.3;
+  color: var(--cor-icone);
+}
+
+/* ---------- Mensagens prontas ---------- */
+.mensagem {
+  margin-top: 24px;
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--cor-linha);
+  border-left: 3px solid var(--dourado-500);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+
+.mensagem figcaption {
+  margin-bottom: 10px;
+  color: var(--cor-destaque-texto);
+  font-size: var(--fs-rotulo);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mensagem blockquote {
+  margin: 0 0 18px;
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.5;
+}
+
+.mensagem .btn.is-copiado {
+  --btn-borda: var(--verde-whatsapp);
+  --btn-texto: #1d7a45;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 640px) {
+  .prosa .dicas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Impressão: a lista vira papel para marcar à mão ---------- */
+@media print {
+  .mensagem .btn,
+  .documento-lateral {
+    display: none !important;
+  }
+
+  .tarefas label {
+    padding-block: 10px;
+  }
+
+  .prosa > section {
+    break-inside: avoid-page;
+  }
+}

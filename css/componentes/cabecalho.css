@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Cabeçalho fixo: logo, menu e botão "Pedir orçamento"
+   No celular e tablet o menu vira um painel aberto pelo botão.
+   ========================================================================== */
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: var(--header-altura);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+
+/* Fundo translúcido com desfoque num pseudo-elemento: com backdrop-filter no próprio
+   cabeçalho, o painel do menu (position: fixed) ficaria preso dentro dele */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: rgba(251, 249, 246, 0.86);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  transition: background-color var(--transicao);
+}
+
+/* Ao rolar a página o cabeçalho ganha linha e sombra */
+.header.is-scrolled {
+  border-bottom-color: var(--cor-linha);
+  box-shadow: 0 10px 30px -24px rgba(8, 29, 46, 0.5);
+}
+
+.header.is-scrolled::before,
+.header.is-menu-open::before {
+  background-color: rgba(251, 249, 246, 0.97);
+}
+
+.header.is-menu-open {
+  border-bottom-color: var(--cor-linha);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  height: 100%;
+}
+
+.header__logo {
+  flex-shrink: 0;
+}
+
+.header__logo img {
+  width: auto;
+  height: 46px;
+}
+
+/* ---------- Menu ---------- */
+.nav {
+  margin-left: auto;
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2vw, 34px);
+}
+
+.nav__link {
+  position: relative;
+  display: block;
+  padding-block: 6px;
+  color: var(--cor-titulo);
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--cor-destaque);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transicao);
+}
+
+.nav__link:hover::after,
+.nav__link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Ações que só aparecem dentro do menu aberto no celular */
+.nav__acoes {
+  display: none;
+}
+
+.header__acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ---------- Botão do menu (celular) ---------- */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  width: 46px;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--cor-linha-forte);
+  border-radius: 50%;
+}
+
+.menu-toggle__bar {
+  display: block;
+  height: 1.5px;
+  border-radius: 2px;
+  background-color: var(--cor-titulo);
+  transition: transform var(--transicao);
+}
+
+.menu-toggle.is-open .menu-toggle__bar:nth-child(1) {
+  transform: translateY(4.25px) rotate(45deg);
+}
+
+.menu-toggle.is-open .menu-toggle__bar:nth-child(2) {
+  transform: translateY(-4.25px) rotate(-45deg);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1024px) {
+  .header__logo img {
+    height: 40px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Painel abaixo do cabeçalho, do topo ao fim da tela */
+  .nav {
+    position: fixed;
+    inset: var(--header-altura) 0 0;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 32px var(--gutter) calc(32px + env(safe-area-inset-bottom));
+    background-color: var(--cor-fundo);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity var(--transicao), visibility var(--transicao), transform var(--transicao);
+  }
+
+  .nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav__link {
+    padding-block: 14px;
+    border-bottom: 1px solid var(--cor-linha);
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    font-weight: 400;
+  }
+
+  .nav__link::after {
+    display: none;
+  }
+
+  .nav__acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .header__cta {
+    display: none;
+  }
+}
+
+/* ---------- Telas muito largas (acima de 1920 px): tudo cresce junto com a tela ---------- */
+@media (min-width: 2200px) {
+  .header__logo img {
+    height: 58px;
+  }
+
+  .nav__list {
+    gap: clamp(34px, 1.6vw, 52px);
+  }
+
+  .nav__link {
+    font-size: clamp(15px, 0.68vw, 19px);
+  }
+}

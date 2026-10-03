@@ -1,0 +1,43 @@
+# ==========================================================================
+# O repositório é público (GitHub Pages): aqui só entra o que pode ser visto.
+# Documentos internos ficam apenas no computador.
+# ==========================================================================
+
+# Documentos internos do projeto (todo arquivo Markdown)
+*.md
+
+# Guia de estilo (página interna de trabalho)
+estilo.html
+css/paginas/estilo.css
+js/paginas/estilo.js
+
+# Material da cliente, prints e fotos originais
+referencias/
+
+# Pasta gerada pelo empacotador (node ferramentas/empacotar.mjs)
+dist/
+
+# WordPress: pastas geradas (o tema em wordpress/ é versionado)
+wordpress/wp-admin/
+wordpress/wp-includes/
+wordpress/wp-content/uploads/
+wordpress/wp-content/plugins/
+wordpress/wp-content/upgrade/
+wordpress/wp-content/cache/
+wordpress/wp-config.php
+
+# Dependências
+node_modules/
+
+# Ambiente e segredos
+.env
+.env.*
+*.log
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+.claude/

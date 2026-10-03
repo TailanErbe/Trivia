@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Botões (forma de pílula, como o detalhe do logo)
+   .btn--primario   azul (no fundo escuro vira dourado)
+   .btn--dourado    dourado com texto azul
+   .btn--contorno   borda fina, fundo transparente
+   .btn--pequeno    versão baixa (cabeçalho)
+   .link-seta       link de texto com seta (ex.: "Ver o serviço")
+   ========================================================================== */
+.btn {
+  --btn-fundo: transparent;
+  --btn-texto: var(--cor-titulo);
+  --btn-borda: transparent;
+  --btn-fundo-hover: var(--btn-fundo);
+  --btn-texto-hover: var(--btn-texto);
+  --btn-borda-hover: var(--btn-borda);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1px solid var(--btn-borda);
+  border-radius: var(--raio-pilula);
+  background-color: var(--btn-fundo);
+  color: var(--btn-texto);
+  font-family: var(--fonte-texto);
+  font-size: 15.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color var(--transicao), color var(--transicao), border-color var(--transicao),
+    transform var(--transicao), box-shadow var(--transicao);
+}
+
+.btn:hover {
+  border-color: var(--btn-borda-hover);
+  background-color: var(--btn-fundo-hover);
+  color: var(--btn-texto-hover);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn .icone {
+  width: 19px;
+  height: 19px;
+}
+
+.btn--primario {
+  --btn-fundo: var(--azul-700);
+  --btn-texto: var(--branco);
+  --btn-fundo-hover: var(--azul-600);
+}
+
+.btn--primario:hover {
+  box-shadow: 0 10px 24px -12px rgba(15, 44, 68, 0.6);
+}
+
+.tema-escuro .btn--primario,
+.btn--dourado {
+  --btn-fundo: var(--dourado-500);
+  --btn-texto: var(--azul-900);
+  --btn-fundo-hover: var(--dourado-300);
+}
+
+.btn--contorno {
+  --btn-borda: var(--cor-linha-forte);
+  --btn-texto: var(--cor-titulo);
+  --btn-borda-hover: var(--cor-titulo);
+}
+
+/* Ícone do WhatsApp em verde dentro de botões de contorno */
+.btn .icone--whatsapp {
+  color: var(--verde-whatsapp);
+}
+
+.btn--pequeno {
+  min-height: 44px;
+  padding: 0 22px;
+  font-size: 14.5px;
+}
+
+.btn--largo {
+  width: 100%;
+}
+
+.btn:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+/* Grupo de botões lado a lado (quebra no celular) */
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Link com seta ---------- */
+.link-seta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--cor-destaque);
+  color: var(--cor-titulo);
+  font-size: 15px;
+  font-weight: 500;
+  transition: color var(--transicao), border-color var(--transicao);
+}
+
+.link-seta .icone {
+  width: 17px;
+  height: 17px;
+  transition: transform var(--transicao);
+}
+
+.link-seta:hover {
+  color: var(--cor-destaque-texto);
+}
+
+.link-seta:hover .icone {
+  transform: translateX(4px);
+}
+
+@media (max-width: 480px) {
+  .botoes .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---------- Telas muito largas (acima de 1920 px): tudo cresce junto com a tela ---------- */
+@media (min-width: 2200px) {
+  .btn {
+    min-height: 60px;
+    padding: 0 34px;
+    font-size: clamp(15.5px, 0.7vw, 19px);
+  }
+
+  .btn--pequeno {
+    min-height: 50px;
+    padding: 0 26px;
+  }
+
+  .link-seta {
+    font-size: clamp(15px, 0.68vw, 19px);
+  }
+}
